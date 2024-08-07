@@ -12,13 +12,16 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtenir les dimensions de l'écran
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // backgroundColor: appDColor,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 850,
+          // Ajuster la hauteur du PageView en fonction de la hauteur de l'écran
+          Expanded(
+            flex: 9, // Prend 9/10 de l'espace vertical
             child: PageView(
               controller: _controller,
               children: const [
@@ -29,14 +32,19 @@ class Splash extends StatelessWidget {
               ],
             ),
           ),
-          SmoothPageIndicator(
-            controller: _controller,
-            count: 4,
-            effect: const ExpandingDotsEffect(
-              activeDotColor: appCColor,
-              dotColor: appEColor,
-              dotHeight: 10,
-              dotWidth: 20,
+          // Indicateur de page
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0), // Espacement autour de l'indicateur
+            child: SmoothPageIndicator(
+              controller: _controller,
+              count: 4,
+              effect: const ExpandingDotsEffect(
+                activeDotColor: appCColor,
+                dotColor: appEColor,
+                dotHeight: 10,
+                dotWidth: 20,
+                spacing: 5, // Espacement entre les points
+              ),
             ),
           ),
         ],

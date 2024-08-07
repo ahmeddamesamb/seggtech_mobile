@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:seggtech/routes/routes_path.dart';
 import 'package:seggtech/utils/app_color.dart';
 
 class Register extends StatelessWidget {
@@ -13,14 +15,18 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenHeight = mediaQuery.size.height;
+    final screenWidth = mediaQuery.size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(screenWidth * 0.04),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               const Center(
                 child: Text(
                   'Création de compte',
@@ -31,7 +37,7 @@ class Register extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 60),
+              SizedBox(height: screenHeight * 0.08),
               TextField(
                 controller: _nomCompletController,
                 decoration: InputDecoration(
@@ -44,7 +50,7 @@ class Register extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.text,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -57,7 +63,7 @@ class Register extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
@@ -70,7 +76,7 @@ class Register extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               TextField(
                 controller: _confirmPasswordController,
                 obscureText: true,
@@ -83,7 +89,7 @@ class Register extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               ValueListenableBuilder<bool>(
                 valueListenable: _acceptTerms,
                 builder: (context, value, child) {
@@ -113,10 +119,10 @@ class Register extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: screenHeight * 0.03),
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: screenHeight * 0.07,
                 child: ElevatedButton(
                   onPressed: () {
                     String nomComplet = _nomCompletController.text;
@@ -147,7 +153,7 @@ class Register extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               const Center(
                 child: Text(
                   'Créer votre compte avec',
@@ -157,14 +163,14 @@ class Register extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.google, color: Colors.red), // Icône Google
+                        icon: const FaIcon(FontAwesomeIcons.google, color: Colors.red), // Icône Google
                         iconSize: 30,
                         onPressed: () {
                           // Google login logic
@@ -173,11 +179,11 @@ class Register extends StatelessWidget {
                       const Text('Google', style: TextStyle(fontSize: 12)),
                     ],
                   ),
-                  const SizedBox(width: 20),
+                  SizedBox(width: screenWidth * 0.05),
                   Column(
                     children: [
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.facebookF, color: Colors.blue), // Icône Facebook
+                        icon: const FaIcon(FontAwesomeIcons.facebookF, color: Colors.blue), // Icône Facebook
                         iconSize: 30,
                         onPressed: () {
                           // Facebook login logic
@@ -188,16 +194,20 @@ class Register extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: screenHeight * 0.02),
               Center(
                 child: RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     text: 'Vous avez déjà un compte, ',
-                    style: TextStyle(color: Colors.black, fontSize: 12),
+                    style: const TextStyle(color: Colors.black, fontSize: 12),
                     children: [
                       TextSpan(
                         text: 'connectez-vous ici',
-                        style: TextStyle(color: appCColor, fontSize: 12),
+                        style: const TextStyle(color: appCColor, fontSize: 12),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, login); // Navigation vers la page de connexion
+                          },
                       ),
                     ],
                   ),

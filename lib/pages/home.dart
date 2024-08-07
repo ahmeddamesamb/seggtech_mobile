@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+
+import '../routes/routes_path.dart';
 
 class Home extends StatefulWidget {
-  const Home({
-    super.key,
-  });
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -21,30 +21,77 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundImage:
-                AssetImage('assets/seggtech_logo.JPG'), // Chemin de votre image
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
             onPressed: () {
-              // Logique de déconnexion
-              Navigator.pop(context); // Exemple de déconnexion simple
+              Scaffold.of(context).openDrawer();
             },
           ),
-        ],
+        ),
       ),
-      body: Row(
-        children: [
-          Expanded(
-            child: Container(
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 300, // Définir la largeur souhaitée pour le DrawerHeader
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius:
+                          70, // Ajuster la taille du CircleAvatar si nécessaire
+                      backgroundImage: AssetImage('assets/seggtech_logo.JPG'),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Seggtech',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Modifier Profil'),
+              onTap: () {
+                // Logique pour modifier le profil
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Paramètres'),
+              onTap: () {
+                // Logique pour les paramètres
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Déconnexion'),
+              onTap: () {
+                // Logique pour déconnexion
+                Navigator.pushNamed(context, login);
+              },
+            ),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
               decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 6, 37,
-                    91), // Couleur de fond pour le conteneur principal
+                color: Color.fromARGB(255, 6, 37, 91),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black87,
@@ -73,15 +120,13 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(
-                      color: const Color(
-                          0xFF003366), // Couleur bleue foncée pour le card
+                      color: const Color(0xFF003366),
                       elevation: 4.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
                         children: [
-                          // Titre à gauche
                           const Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -103,20 +148,21 @@ class _HomeState extends State<Home> {
                                       fontSize: 14,
                                       color: Colors.white70,
                                     ),
-                                  ),                       ],
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                          // Graphique à droite
                           SizedBox(
-                            width:
-                                100, // Largeur fixe réduite pour le graphique
+                            width: 140,
+                            height: 140,
                             child: CircularPercentIndicator(
-                              radius: 60, // Rayon réduit pour le graphique
+                              radius: 60,
                               lineWidth: 15,
-                              percent: 0.7, // Pourcentage
+                              percent: 0.7,
                               circularStrokeCap: CircularStrokeCap.round,
-                              backgroundColor: Color.fromARGB(255, 3, 11, 35),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 3, 11, 35),
                               linearGradient: const LinearGradient(
                                 colors: [
                                   Color.fromARGB(255, 203, 7, 237),
@@ -129,8 +175,7 @@ class _HomeState extends State<Home> {
                               center: const Text(
                                 '70%',
                                 style: TextStyle(
-                                  fontSize:
-                                      14, // Taille du texte au centre réduite
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -146,15 +191,13 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(
-                      color: const Color(
-                          0xFF003366), // Couleur bleue foncée pour le card
+                      color: const Color(0xFF003366),
                       elevation: 4.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
                         children: [
-                          // Titre à gauche
                           const Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -181,16 +224,16 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-                          // Graphique à droite
                           SizedBox(
-                            width:
-                                100, // Largeur fixe réduite pour le graphique
+                            width: 140,
+                            height: 140,
                             child: CircularPercentIndicator(
-                              radius: 60, // Rayon réduit pour le graphique
+                              radius: 60,
                               lineWidth: 15,
-                              percent: 0.6, // Pourcentage
+                              percent: 0.6,
                               circularStrokeCap: CircularStrokeCap.round,
-                              backgroundColor: Color.fromARGB(255, 3, 11, 35),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 3, 11, 35),
                               linearGradient: const LinearGradient(
                                 colors: [
                                   Color.fromARGB(255, 231, 214, 19),
@@ -203,8 +246,7 @@ class _HomeState extends State<Home> {
                               center: const Text(
                                 '60%',
                                 style: TextStyle(
-                                  fontSize:
-                                      14, // Taille du texte au centre réduite
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -215,21 +257,18 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 16),
-                  // Deuxième carte avec 60%
+                  // Troisième carte avec 40%
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(
-                      color: const Color(
-                          0xFF003366), // Couleur bleue foncée pour le card
+                      color: const Color(0xFF003366),
                       elevation: 4.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
                         children: [
-                          // Titre à gauche
                           const Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -256,16 +295,16 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-                          // Graphique à droite
                           SizedBox(
-                            width:
-                                100, // Largeur fixe réduite pour le graphique
+                            width: 140,
+                            height: 140,
                             child: CircularPercentIndicator(
-                              radius: 60, // Rayon réduit pour le graphique
+                              radius: 60,
                               lineWidth: 15,
-                              percent: 0.4, // Pourcentage
+                              percent: 0.4,
                               circularStrokeCap: CircularStrokeCap.round,
-                              backgroundColor: Color.fromARGB(255, 3, 11, 35),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 3, 11, 35),
                               linearGradient: const LinearGradient(
                                 colors: [
                                   Color(0xFF526ADA),
@@ -278,8 +317,7 @@ class _HomeState extends State<Home> {
                               center: const Text(
                                 '40%',
                                 style: TextStyle(
-                                  fontSize:
-                                      14, // Taille du texte au centre réduite
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -291,19 +329,17 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Deuxième carte avec 60%
+                  // Quatrième carte avec 90%
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(
-                      color: const Color(
-                          0xFF003366), // Couleur bleue foncée pour le card
+                      color: const Color(0xFF003366),
                       elevation: 4.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
                         children: [
-                          // Titre à gauche
                           const Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(16.0),
@@ -311,7 +347,7 @@ class _HomeState extends State<Home> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'EAU',
+                                    'Turbidity',
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -320,7 +356,7 @@ class _HomeState extends State<Home> {
                                   ),
                                   SizedBox(height: 8),
                                   Text(
-                                    'Current eau level',
+                                    'Current turbidity level',
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.white70,
@@ -330,20 +366,20 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
-                          // Graphique à droite
                           SizedBox(
-                            width:
-                                100, // Largeur fixe réduite pour le graphique
+                            width: 140,
+                            height: 140,
                             child: CircularPercentIndicator(
-                              radius: 60, // Rayon réduit pour le graphique
+                              radius: 60,
                               lineWidth: 15,
-                              percent: 0.9, // Pourcentage
+                              percent: 0.9,
                               circularStrokeCap: CircularStrokeCap.round,
-                              backgroundColor: Color.fromARGB(255, 3, 11, 35),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 3, 11, 35),
                               linearGradient: const LinearGradient(
                                 colors: [
-                                  Color.fromARGB(255, 245, 101, 12),
-                                  Color.fromARGB(255, 245, 101, 12),
+                                  Color.fromARGB(255, 254, 9, 9),
+                                  Color.fromARGB(255, 254, 9, 9),
                                   Color.fromARGB(255, 212, 236, 237),
                                 ],
                                 begin: Alignment.topCenter,
@@ -352,8 +388,7 @@ class _HomeState extends State<Home> {
                               center: const Text(
                                 '90%',
                                 style: TextStyle(
-                                  fontSize:
-                                      14, // Taille du texte au centre réduite
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -367,8 +402,8 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

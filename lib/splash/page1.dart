@@ -7,6 +7,10 @@ class Page1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtenir les dimensions de l'écran
+    final screenWidth = MediaQuery.of(context).size.width;
+    final buttonWidth = screenWidth * 0.8; // Largeur du bouton en pourcentage de la largeur de l'écran
+
     return Column(
       children: [
         // Première partie avec l'image
@@ -62,7 +66,7 @@ class Page1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 350, // Largeur fixe du bouton
+                    width: buttonWidth, // Largeur dynamique du bouton
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -70,12 +74,15 @@ class Page1 extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 15), // Padding interne
                         textStyle: const TextStyle(fontSize: 18), // Taille du texte
                       ),
-                      child: const Text('Bouton d’action 1',style: TextStyle(color: appFColor)),
+                      child: const Text(
+                        'Bouton d’action 1',
+                        style: TextStyle(color: appFColor),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10), // Espacement entre les boutons
                   SizedBox(
-                    width: 350, // Largeur fixe du bouton
+                    width: buttonWidth, // Largeur dynamique du bouton
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -83,7 +90,10 @@ class Page1 extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 15), // Padding interne
                         textStyle: const TextStyle(fontSize: 18), // Taille du texte
                       ),
-                      child: const Text('Bouton d’action 2',style: TextStyle(color: appFColor),),
+                      child: const Text(
+                        'Bouton d’action 2',
+                        style: TextStyle(color: appFColor),
+                      ),
                     ),
                   ),
                 ],

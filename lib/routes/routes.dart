@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:seggtech/pages/Forgot_password.dart';
 import 'package:seggtech/pages/home.dart';
 import 'package:seggtech/pages/inscription.dart';
 import 'package:seggtech/pages/login.dart';
-import 'package:seggtech/pages/not_found.dart';
 import 'package:seggtech/routes/routes_path.dart';
 import 'package:seggtech/splash/page1.dart';
 import 'package:seggtech/splash/page2.dart';
@@ -18,8 +16,6 @@ class Routers {
         return MaterialPageRoute(builder: (_) => Login());
       case inscription:
         return MaterialPageRoute(builder: (_) => Register());
-      case password:
-        return MaterialPageRoute(builder: (_) => ForgotPassword());
       case home:
         return MaterialPageRoute(builder: (_) => const Home());
       case splash:
@@ -33,7 +29,7 @@ class Routers {
       case page4:
         return MaterialPageRoute(builder: (_) => const Page4());
       default:
-        return MaterialPageRoute(builder: (_) => const NotFoundPage());
+        return MaterialPageRoute(builder: (_) =>  Login());
     }
   }
 }

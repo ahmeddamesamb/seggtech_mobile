@@ -13,21 +13,25 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenHeight = mediaQuery.size.height;
+    final screenWidth = mediaQuery.size.width;
+
     return Scaffold(
       body: Stack(
         children: [
           // Partie colorée en appCColor
           Container(
             color: appCColor,
-            height: MediaQuery.of(context).size.height,
+            height: screenHeight,
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height / 3,
+            top: screenHeight / 3,
             left: 0,
             right: 0,
             child: Container(
-              height: 2 * MediaQuery.of(context).size.height / 3,
-              padding: const EdgeInsets.all(16.0),
+              height: 2 * screenHeight / 3,
+              padding: EdgeInsets.all(screenWidth * 0.04),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -38,7 +42,7 @@ class Login extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
+                  SizedBox(height: screenHeight * 0.03),
                   const Center(
                     child: Text(
                       'Connexion sécurisée',
@@ -49,7 +53,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: screenHeight * 0.03),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -57,15 +61,14 @@ class Login extends StatelessWidget {
                       hintText: 'Entrez votre email',
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.8),
-                      labelStyle: const TextStyle(
-                          color: Colors.black), // Couleur du label
+                      labelStyle: const TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   TextField(
                     controller: _passwordController,
                     obscureText: true,
@@ -74,14 +77,13 @@ class Login extends StatelessWidget {
                       hintText: 'Entrez votre mot de passe',
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
-                      labelStyle: const TextStyle(
-                          color: Colors.black), // Couleur du label
+                      labelStyle: const TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -107,8 +109,12 @@ class Login extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigation vers la page de mot de passe oublié
-                          Navigator.pushNamed(context, password);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const ForgotPasswordDialog();
+                            },
+                          );
                         },
                         child: const Text(
                           'Mot de passe oublié',
@@ -117,10 +123,10 @@ class Login extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: screenHeight * 0.03),
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: screenHeight * 0.07,
                     child: ElevatedButton(
                       onPressed: () {
                         String email = _emailController.text;
@@ -151,7 +157,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   const Center(
                     child: Text(
                       'Connectez-vous avec',
@@ -161,7 +167,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -178,7 +184,7 @@ class Login extends StatelessWidget {
                           const Text('Google', style: TextStyle(fontSize: 12)),
                         ],
                       ),
-                      const SizedBox(width: 20),
+                      SizedBox(width: screenWidth * 0.05),
                       Column(
                         children: [
                           IconButton(
@@ -195,7 +201,7 @@ class Login extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   Center(
                     child: RichText(
                       text: TextSpan(
@@ -205,7 +211,8 @@ class Login extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'Inscrivez-vous ici',
-                            style: const TextStyle(color: appCColor, fontSize: 12),
+                            style:
+                                const TextStyle(color: appCColor, fontSize: 12),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 // Navigation vers la page d'inscription
@@ -228,4 +235,51 @@ class Login extends StatelessWidget {
   bool _validateFields(String email, String password) {
     return email.isNotEmpty && password.isNotEmpty;
   }
+}
+
+class ForgotPasswordDialog extends StatefulWidget {
+  const ForgotPasswordDialog({super.key});
+
+  @override
+  _ForgotPasswordDialogState createState() => _ForgotPasswordDialogState();
+}
+
+class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
+  final TextEditingController _emailController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Réinitialiser le mot de passe'),
+      content: TextField(
+        controller: _emailController,
+        decoration: const InputDecoration(
+          labelText: 'Entrez votre email',
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Annuler'),
+        ),
+        TextButton(
+          onPressed: () {
+            String email = _emailController.text;
+            // Implémentez ici la logique de réinitialisation du mot de passe avec l'email
+            // Par exemple : sendPasswordResetEmail(email);
+            Navigator.of(context).pop(); // Ferme le popup
+          },
+          child: const Text('Envoyer'),
+        ),
+      ],
+    );
+  }
+}
+
+// Exemple de fonction pour envoyer l'email de réinitialisation
+void sendPasswordResetEmail(String email) {
+  // Implémentez la logique pour envoyer l'email de réinitialisation ici
+  print('Email de réinitialisation envoyé à : $email');
 }

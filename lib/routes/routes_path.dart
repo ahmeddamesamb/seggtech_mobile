@@ -5,7 +5,6 @@ const String popup = "/popup";
 const String message = "/message";
 const String profile = "/profile";
 const String inscription = '/inscription';
-const String password = '/password';
 const String home = '/home';
 const String page1 = '/page1';
 const String page2 = '/page2';
