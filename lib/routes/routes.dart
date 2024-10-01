@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:seggtech/pages/home.dart';
-import 'package:seggtech/pages/inscription.dart';
+import 'package:seggtech/pages/homescreen.dart';
 import 'package:seggtech/pages/login.dart';
 import 'package:seggtech/routes/routes_path.dart';
-import 'package:seggtech/splash/page1.dart';
 import 'package:seggtech/splash/page2.dart';
-import 'package:seggtech/splash/page3.dart';
-import 'package:seggtech/splash/page4.dart';
-import 'package:seggtech/splash/splash.dart';
+
+import '../pages/accueil.dart';
+import '../splash/page_view.dart';
+import '../splash/splash.dart';
 
 class Routers {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case login:
-        return MaterialPageRoute(builder: (_) => Login());
-      case inscription:
-        return MaterialPageRoute(builder: (_) => Register());
+        return MaterialPageRoute(builder: (_) => const Login());
       case home:
         return MaterialPageRoute(builder: (_) => const Home());
       case splash:
-        return MaterialPageRoute(builder: (_) =>  Splash());
-      case page1:
-        return MaterialPageRoute(builder: (_) => const Page1());
+        return MaterialPageRoute(builder: (_) => const Splash());
       case page2:
         return MaterialPageRoute(builder: (_) => const Page2());
-      case page3:
-        return MaterialPageRoute(builder: (_) => const Page3());
-      case page4:
-        return MaterialPageRoute(builder: (_) => const Page4());
+      case pageview:
+        return MaterialPageRoute(builder: (_) => const PageViewScreen());
+      case homescreen:
+        return MaterialPageRoute(builder: (_) => const Homescreen());
+        case accueil:
+        return MaterialPageRoute(builder: (_) => const Accueil());
       default:
-        return MaterialPageRoute(builder: (_) =>  Login());
+        return MaterialPageRoute(builder: (_) => const Login());
     }
   }
 }

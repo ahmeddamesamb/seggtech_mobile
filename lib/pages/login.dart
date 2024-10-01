@@ -1,227 +1,37 @@
-import 'package:flutter/gestures.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:seggtech/routes/routes_path.dart';
-import 'package:seggtech/utils/app_color.dart';
+import 'package:seggtech/services/auth_services.dart';
+
+import '../utils/images_asset.dart';
 
 class Login extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final ValueNotifier<bool> _rememberMe = ValueNotifier<bool>(false);
-
-  Login({super.key});
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final screenHeight = mediaQuery.size.height;
-    final screenWidth = mediaQuery.size.width;
-
     return Scaffold(
       body: Stack(
         children: [
-          // Partie colorée en appCColor
-          Container(
-            color: appCColor,
-            height: screenHeight,
+          // Image de couverture
+          Positioned.fill(
+            child: Image.asset(
+              ImagesAsset.cover1,
+              fit: BoxFit.cover,
+            ),
           ),
-          Positioned(
-            top: screenHeight / 3,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 2 * screenHeight / 3,
-              padding: EdgeInsets.all(screenWidth * 0.04),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  topRight: Radius.circular(30.0),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: screenHeight * 0.03),
-                  const Center(
-                    child: Text(
-                      'Connexion sécurisée',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.03),
-                  TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'Entrez votre email',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.8),
-                      labelStyle: const TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Mot de Passe',
-                      hintText: 'Entrez votre mot de passe',
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.9),
-                      labelStyle: const TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ValueListenableBuilder<bool>(
-                        valueListenable: _rememberMe,
-                        builder: (context, value, child) {
-                          return Row(
-                            children: [
-                              Checkbox(
-                                value: value,
-                                onChanged: (checked) {
-                                  _rememberMe.value = checked ?? false;
-                                },
-                              ),
-                              const Text(
-                                'Se souvenir de moi',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const ForgotPasswordDialog();
-                            },
-                          );
-                        },
-                        child: const Text(
-                          'Mot de passe oublié',
-                          style: TextStyle(color: appCColor, fontSize: 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: screenHeight * 0.03),
-                  SizedBox(
-                    width: double.infinity,
-                    height: screenHeight * 0.07,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        String email = _emailController.text;
-                        String password = _passwordController.text;
 
-                        if (_validateFields(email, password)) {
-                          // Rediriger vers la page d'accueil
-                          Navigator.pushNamed(context, home);
-                        } else {
-                          // Show error message
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                  'Veuillez entrer des informations valides.'),
-                            ),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: appDColor, // Couleur du bouton
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                      ),
-                      child: const Text(
-                        "Se connecter",
-                        style: TextStyle(color: appFColor),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  const Center(
-                    child: Text(
-                      'Connectez-vous avec',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          IconButton(
-                            icon: const FaIcon(FontAwesomeIcons.google,
-                                color: Colors.red), // Icône Google
-                            iconSize: 30,
-                            onPressed: () {
-                              // Google login logic
-                            },
-                          ),
-                          const Text('Google', style: TextStyle(fontSize: 12)),
-                        ],
-                      ),
-                      SizedBox(width: screenWidth * 0.05),
-                      Column(
-                        children: [
-                          IconButton(
-                            icon: const FaIcon(FontAwesomeIcons.facebookF,
-                                color: Colors.blue), // Icône Facebook
-                            iconSize: 30,
-                            onPressed: () {
-                              // Facebook login logic
-                            },
-                          ),
-                          const Text('Facebook',
-                              style: TextStyle(fontSize: 12)),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Vous n\'avez pas de compte ? ',
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 12),
-                        children: [
-                          TextSpan(
-                            text: 'Inscrivez-vous ici',
-                            style:
-                                const TextStyle(color: appCColor, fontSize: 12),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                // Navigation vers la page d'inscription
-                                Navigator.pushNamed(context, inscription);
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
+          // Contenu
+          const Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 30),
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: LoginForm(),
                   ),
                 ],
               ),
@@ -231,9 +41,178 @@ class Login extends StatelessWidget {
       ),
     );
   }
+}
 
-  bool _validateFields(String email, String password) {
-    return email.isNotEmpty && password.isNotEmpty;
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _termsAccepted =
+      false; // Ajout de la variable pour les termes d'utilisation
+  AuthService auth = AuthService();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: _emailController,
+            style:
+                const TextStyle(color: Colors.white), // Couleur du texte saisi
+            decoration: const InputDecoration(
+              labelText: 'Email',
+              labelStyle:
+                  TextStyle(color: Colors.white), // Couleur du texte du label
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Colors.white), // Couleur de la bordure
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white), // Bordure activée
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Colors.white), // Bordure focalisée
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer votre email';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 20),
+          TextFormField(
+            controller: _passwordController,
+            obscureText: true,
+            style:
+                const TextStyle(color: Colors.white), // Couleur du texte saisi
+            decoration: const InputDecoration(
+              labelText: 'Mot de passe',
+              labelStyle:
+                  TextStyle(color: Colors.white), // Couleur du texte du label
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Colors.white), // Couleur de la bordure
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white), // Bordure activée
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Colors.white), // Bordure focalisée
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Veuillez entrer votre mot de passe';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(), // Pour équilibrer la ligne
+              TextButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const ForgotPasswordDialog();
+                    },
+                  );
+                },
+                child: const Text(
+                  'Mot de passe oublié',
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 12), // Couleur blanche
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Checkbox(
+                value: _termsAccepted,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _termsAccepted = value!;
+                  });
+                },
+                activeColor: Colors.blue,
+              ),
+              const Expanded(
+                child: Text(
+                  'J\'accepte les termes d\'utilisation',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, homescreen);
+              if (_formKey.currentState!.validate()) {
+                if (!_termsAccepted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text(
+                            'Veuillez accepter les termes d\'utilisation')),
+                  );
+                  return;
+                }
+                var request = auth.login('login', {
+                  'email': _emailController.text,
+                  'password': _passwordController.text
+                });
+                request.then((value) => {
+                      print(json.decode(value.body)),
+                      if (json.decode(value.body) != null)
+                        {Navigator.pushNamed(context, home)}
+                    });
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white, // Couleur de fond en blanc
+              padding: const EdgeInsets.symmetric(
+                vertical: 16.0,
+                horizontal: 50.0, // Ajustement de la largeur
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0), // Coins arrondis
+              ),
+              elevation: 5, // Ajout d'une ombre pour un effet de profondeur
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min, // Ajustement à la taille minimale
+              children: [
+                Icon(Icons.login, color: Colors.blue), // Icône d'entrée en bleu
+                SizedBox(width: 10), // Espacement entre l'icône et le texte
+                Text(
+                  'Se connecter',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold), // Texte en bleu
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -253,8 +232,14 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
       title: const Text('Réinitialiser le mot de passe'),
       content: TextField(
         controller: _emailController,
+        style: const TextStyle(
+            color: Colors
+                .black), // Couleur du texte saisi dans la boîte de dialogue
         decoration: const InputDecoration(
           labelText: 'Entrez votre email',
+          labelStyle: TextStyle(
+              color: Colors
+                  .black), // Couleur du texte du label dans la boîte de dialogue
         ),
       ),
       actions: <Widget>[
@@ -267,9 +252,20 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
         TextButton(
           onPressed: () {
             String email = _emailController.text;
-            // Implémentez ici la logique de réinitialisation du mot de passe avec l'email
-            // Par exemple : sendPasswordResetEmail(email);
-            Navigator.of(context).pop(); // Ferme le popup
+            if (email.isNotEmpty && email.contains('@')) {
+              sendPasswordResetEmail(email);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content:
+                        Text('Email de réinitialisation envoyé à : $email')),
+              );
+              Navigator.of(context).pop();
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                    content: Text('Veuillez entrer une adresse email valide')),
+              );
+            }
           },
           child: const Text('Envoyer'),
         ),

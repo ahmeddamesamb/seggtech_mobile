@@ -1,12 +1,11 @@
 const String splash = "/";
 const String login = "/login";
 const String alert = "/alert";
+const String accueil = "/accueil";
+const String homescreen = "/homescreen";
 const String popup = "/popup";
 const String message = "/message";
 const String profile = "/profile";
-const String inscription = '/inscription';
 const String home = '/home';
-const String page1 = '/page1';
 const String page2 = '/page2';
-const String page3 = '/page3';
-const String page4 = '/page4';
+const String pageview = '/pageview';
