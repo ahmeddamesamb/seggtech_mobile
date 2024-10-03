@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seggtech/pages/profil/profil_edit.dart';
+import 'package:seggtech/pages/profil.dart';
 
 import '../utils/images_asset.dart';
 import 'abonnement.dart';
@@ -30,7 +30,7 @@ class _HomescreenState extends State<Homescreen> {
     const Accueil(), // Remplacez par vos pages existantes
     const Graphique(),
     const Abonnement(),
-    const ProfilEdit(),
+    const Profil(),
   ];
 
   @override

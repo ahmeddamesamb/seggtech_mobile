@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../utils/images_asset.dart';
 
-class NouveauMotDePasse extends StatefulWidget {
-  const NouveauMotDePasse({super.key});
+class Historique extends StatefulWidget {
+  const Historique({super.key});
 
   @override
-  State<NouveauMotDePasse> createState() => _NouveauMotDePasseState();
+  State<Historique> createState() => _HistoriqueState();
 }
 
-class _NouveauMotDePasseState extends State<NouveauMotDePasse> {
+class _HistoriqueState extends State<Historique> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
