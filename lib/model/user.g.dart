@@ -11,6 +11,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       nom: json['nom'] as String?,
       email: json['email'] as String?,
       telephone: json['telephone'] as String?,
+      photoUrl: json['photoUrl'] as String?,
       password: json['password'] as String?,
       isActive: json['isActive'] as bool?,
     );
@@ -20,6 +21,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'nom': instance.nom,
       'email': instance.email,
       'telephone': instance.telephone,
+      'photoUrl': instance.photoUrl,
       'password': instance.password,
       'isActive': instance.isActive,
     };

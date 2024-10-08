@@ -4,13 +4,15 @@ import 'package:http/http.dart' as http;
 import 'package:seggtech/services/http_helper.dart';
 import 'package:seggtech/services/share_preference/login_shared.dart';
 
+import '../constantes/api_constantes.dart';
+
 class AuthService extends HttpHelper {
   ConnectedUser userconnect = ConnectedUser();
 
   Future<dynamic> login(String route, dynamic data) async {
     try {
       var res = await http.post(
-        Uri.parse(apiUrl + route),
+        Uri.parse(baseApiUrlLocal + route),
         body: data,
       );
 

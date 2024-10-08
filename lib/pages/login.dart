@@ -163,7 +163,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, homescreen);
+              // Navigator.pushNamed(context, homescreen);
               if (_formKey.currentState!.validate()) {
                 if (!_termsAccepted) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -180,7 +180,7 @@ class _LoginFormState extends State<LoginForm> {
                 request.then((value) => {
                       print(json.decode(value.body)),
                       if (json.decode(value.body) != null)
-                        {Navigator.pushNamed(context, home)}
+                        {Navigator.pushNamed(context, homescreen)}
                     });
               }
             },

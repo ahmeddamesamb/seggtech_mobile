@@ -16,18 +16,16 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   int notificationCount = 3; // Nombre de notifications
   int _selectedIndex =
-      0; // Index de l'élément sélectionné dans la BottomNavigationBar
+  0; // Index de l'élément sélectionné dans la BottomNavigationBar
 
-  // Fonction pour gérer le changement de page
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  // Liste des pages à afficher
   final List<Widget> _pages = [
-    const Accueil(), // Remplacez par vos pages existantes
+    const Accueil(),
     const Graphique(),
     const Abonnement(),
     const Profil(),
@@ -38,7 +36,6 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // L'image de fond
           Container(
             height: double.infinity,
             width: double.infinity,
@@ -119,11 +116,11 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   margin: const EdgeInsets.only(
                     top:
-                        120.0, // Décalage pour que l'image soit visible en dessous
+                    120.0, // Décalage pour que l'image soit visible en dessous
                   ),
                   child: IndexedStack(
                     index:
-                        _selectedIndex, // Change la page en fonction de l'index
+                    _selectedIndex, // Change la page en fonction de l'index
                     children: _pages,
                   ),
                 ),
@@ -157,11 +154,15 @@ class _HomescreenState extends State<Homescreen> {
               label: 'Profil',
             ),
           ],
-          currentIndex: _selectedIndex, // L'index sélectionné
-          selectedItemColor: Colors.blue, // Couleur de l'item sélectionné
+          currentIndex: _selectedIndex,
+          // L'index sélectionné
+          selectedItemColor: Colors.blue,
+          // Couleur de l'item sélectionné
           unselectedItemColor:
-              Colors.grey, // Couleur des items non sélectionnés
-          onTap: _onItemTapped, // Fonction appelée lors de l'interaction
+          Colors.grey,
+          // Couleur des items non sélectionnés
+          onTap: _onItemTapped,
+          // Fonction appelée lors de l'interaction
           type: BottomNavigationBarType.fixed, // Empêche les items de bouger
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/images_asset.dart';
 import '../routes/routes_path.dart';
+import '../services/share_preference/login_shared.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -13,6 +13,8 @@ class Profil extends StatefulWidget {
 class _ProfilEditState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
+    ConnectedUser userconnect = ConnectedUser();
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -30,18 +32,18 @@ class _ProfilEditState extends State<Profil> {
                     height: 90.0,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: ClipOval(
-                      child: Image.asset(
-                        ImagesAsset.wave,
+                      child: Image.network(
+                        '${userconnect.getCurrentUser()!.photoUrl}',
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  const Text(
-                    "NMA Sanders",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  Text(
+                    '${userconnect.getCurrentUser()?.nom}',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),
-                  const Text("youremail@prodeme.com"),
+                  Text('${userconnect.getCurrentUser()?.email}'),
                 ],
               ),
             ),
@@ -64,7 +66,7 @@ class _ProfilEditState extends State<Profil> {
                     ListTile(
                       leading: const Icon(Icons.edit_outlined),
                       title: const Text('Éditer mon profil'),
-                      dense: true, // Réduit l'espace
+                      dense: true,
                       onTap: () {
                         Navigator.pushNamed(context, edit_profile);
                       },
@@ -168,7 +170,7 @@ class _ProfilEditState extends State<Profil> {
                       title: const Text('Se déconnecter'),
                       dense: true, // Réduit l'espace
                       onTap: () {
-                        Navigator.pushNamed(context, '/history');
+                        Navigator.pushNamed(context, login);
                       },
                     ),
                   ],

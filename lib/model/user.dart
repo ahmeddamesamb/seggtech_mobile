@@ -8,18 +8,23 @@ class User {
   String? nom;
   String? email;
   String? telephone;
+  String? photoUrl;
   String? password;
   bool? isActive;
 
-  User(
-      {this.id,
-      this.nom,
-      this.email,
-      this.telephone,
-      this.password,
-      this.isActive});
+  User({
+    this.id,
+    this.nom,
+    this.email,
+    this.telephone,
+    this.photoUrl,
+    this.password,
+    this.isActive,
+  });
+
   // Méthode fromJson générée
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
   // Méthode toJson générée
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }

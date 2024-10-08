@@ -29,8 +29,8 @@ class ConnectedUser extends SharedHelper {
     await SharedHelper.prefs?.setString("user", jsonEncode(user));
   }
 
-  Future<User?> getCurrentUser() async {
-    await _ensurePrefsInitialized();
+  User? getCurrentUser() {
+    _ensurePrefsInitialized(); // Appelez cette méthode si nécessaire, sinon supprimez-la
     var userJson = SharedHelper.prefs?.getString("user");
     if (userJson != null) {
       try {

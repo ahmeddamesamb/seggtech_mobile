@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:seggtech/services/share_preference/login_shared.dart';
 
+import '../constantes/api_constantes.dart';
+
 class HttpHelper {
   final Dio api = Dio();
-  final String apiUrl = 'http://192.168.1.17:8000/api/';
-
   final protocol = "http";
 
   HttpHelper() {
@@ -15,7 +15,7 @@ class HttpHelper {
       }
 
       if (!options.path.contains(protocol)) {
-        options.path = apiUrl + options.path;
+        options.path = baseApiUrlLocal + options.path;
       }
 
       if (!isContainsPath("/login") && !isContainsPath("/sing-in")) {
@@ -41,7 +41,7 @@ class HttpHelper {
 
   Future<bool> refreshToken(String refreshToken) async {
     final response = await api
-        .post('$apiUrl/auth/refresh', data: {'refreshToken': refreshToken});
+        .post('$baseApiUrlLocal/auth/refresh', data: {'refreshToken': refreshToken});
     if (response.statusCode == 201) {
       refreshToken = response.data;
       return true;
@@ -65,7 +65,7 @@ class HttpHelper {
   Future<Response?> handlePostRequest(String route, dynamic data) async {
     try {
       var res = await api.post(
-        apiUrl + route,
+        baseApiUrlLocal + route,
         data: data,
         options: Options(
             responseType: ResponseType.plain, contentType: 'application/json'),
@@ -84,7 +84,7 @@ class HttpHelper {
   Future<Response?> handleGetRequest(String route, {dynamic data}) async {
     try {
       var res = await api.get(
-        apiUrl + route,
+        baseApiUrlLocal + route,
         queryParameters: data,
         options: Options(
             responseType: ResponseType.plain, contentType: 'application/json'),
