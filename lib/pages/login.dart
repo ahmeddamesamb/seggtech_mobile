@@ -70,8 +70,8 @@ class _LoginFormState extends State<LoginForm> {
                 const TextStyle(color: Colors.white), // Couleur du texte saisi
             decoration: const InputDecoration(
               labelText: 'Email',
-              labelStyle:
-                  TextStyle(color: Colors.white), // Couleur du texte du label
+              labelStyle: TextStyle(color: Colors.white),
+              // Couleur du texte du label
               border: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Colors.white), // Couleur de la bordure
@@ -95,12 +95,12 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             controller: _passwordController,
             obscureText: true,
-            style:
-                const TextStyle(color: Colors.white), // Couleur du texte saisi
+            style: const TextStyle(color: Colors.white),
+            // Couleur du texte saisi
             decoration: const InputDecoration(
               labelText: 'Mot de passe',
-              labelStyle:
-                  TextStyle(color: Colors.white), // Couleur du texte du label
+              labelStyle: TextStyle(color: Colors.white),
+              // Couleur du texte du label
               border: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Colors.white), // Couleur de la bordure

@@ -15,10 +15,8 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    // Naviguer vers la Page2 après 5 secondes
     Timer(const Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacementNamed(
-          '/pageview'); // Assurez-vous que cela correspond à votre route
+      Navigator.of(context).pushReplacementNamed('/pageview');
     });
   }
 

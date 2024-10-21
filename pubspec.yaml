@@ -60,7 +60,7 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/logo_app1.png"
+  image_path: "assets/photo_app.png"
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +87,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo_app1.png
+    - assets/photo_app.png
     - assets/logo.png
     - assets/cover.png
     - assets/cover1.png

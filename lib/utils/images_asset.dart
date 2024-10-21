@@ -1,6 +1,7 @@
 class ImagesAsset {
   static String logo = 'assets/logo.png';
   static String logoApp1 = 'assets/logo_app1.png';
+  static String photoApp = 'assets/photo_app.png';
   static String cover = 'assets/cover.png';
   static String cover1 = 'assets/cover1.png';
   static String cover2 = 'assets/cover.jpg';

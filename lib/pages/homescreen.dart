@@ -16,7 +16,7 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   int notificationCount = 3; // Nombre de notifications
   int _selectedIndex =
-  0; // Index de l'élément sélectionné dans la BottomNavigationBar
+      0; // Index de l'élément sélectionné dans la BottomNavigationBar
 
   void _onItemTapped(int index) {
     setState(() {
@@ -116,11 +116,11 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   margin: const EdgeInsets.only(
                     top:
-                    120.0, // Décalage pour que l'image soit visible en dessous
+                        120.0, // Décalage pour que l'image soit visible en dessous
                   ),
                   child: IndexedStack(
                     index:
-                    _selectedIndex, // Change la page en fonction de l'index
+                        _selectedIndex, // Change la page en fonction de l'index
                     children: _pages,
                   ),
                 ),
@@ -158,8 +158,7 @@ class _HomescreenState extends State<Homescreen> {
           // L'index sélectionné
           selectedItemColor: Colors.blue,
           // Couleur de l'item sélectionné
-          unselectedItemColor:
-          Colors.grey,
+          unselectedItemColor: Colors.grey,
           // Couleur des items non sélectionnés
           onTap: _onItemTapped,
           // Fonction appelée lors de l'interaction

@@ -7,10 +7,10 @@ class Profil extends StatefulWidget {
   const Profil({super.key});
 
   @override
-  State<Profil> createState() => _ProfilEditState();
+  State<Profil> createState() => _ProfilState();
 }
 
-class _ProfilEditState extends State<Profil> {
+class _ProfilState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
     ConnectedUser userconnect = ConnectedUser();
@@ -33,7 +33,7 @@ class _ProfilEditState extends State<Profil> {
                     decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: ClipOval(
                       child: Image.network(
-                        '${userconnect.getCurrentUser()!.photoUrl}',
+                        '${userconnect.getCurrentUser()!.photo}',
                         fit: BoxFit.cover,
                       ),
                     ),

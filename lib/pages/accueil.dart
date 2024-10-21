@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -36,11 +37,9 @@ class _AccueilState extends State<Accueil> {
         children: [
           Column(
             children: [
-              // Partie supérieure de la page (espacement au-dessus du contenu blanc)
               Expanded(
                 child: Column(
                   children: [
-                    // Card avec des bordures et taille augmentée
                     Card(
                       shape: RoundedRectangleBorder(
                         borderRadius:
@@ -55,12 +54,69 @@ class _AccueilState extends State<Accueil> {
                             0.9, // 90% de la largeur de l'écran
                         height: 160.0, // Hauteur augmentée
                         padding:
-                            const EdgeInsets.all(16.0), // Espacement interne
-                        child: const Text(
-                          'Contenu de la carte', // Contenu de la carte
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            const EdgeInsets.all(2.0), // Espacement interne
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Card(
+                            color: const Color(0xFF003366),
+                            elevation: 16.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Row(
+                              children: [
+                                const Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Qualite de L\'eau',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 140,
+                                  height: 140,
+                                  child: CircularPercentIndicator(
+                                    radius: 60,
+                                    lineWidth: 15,
+                                    percent: 0.6,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 3, 11, 35),
+                                    linearGradient: const LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 231, 214, 19),
+                                        Color.fromARGB(255, 231, 214, 19),
+                                        Color.fromARGB(255, 212, 236, 237),
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                                    center: const Text(
+                                      '60%',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -116,7 +172,8 @@ class _AccueilState extends State<Accueil> {
                                 right: 20.0,
                               ),
                               child: Text(
-                                '<${_currentIndex + 1}/${texts.length}>', // Affiche 1/n, 2/n, ou n/n
+                                '<${_currentIndex + 1}/${texts.length}>',
+                                // Affiche 1/n, 2/n, ou n/n
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -140,7 +197,7 @@ class _AccueilState extends State<Accueil> {
                       ),
                     ),
                     // Espace restant pour le contenu principal
-                    Expanded(
+                    SingleChildScrollView(
                       child: Column(
                         children: [
                           Column(
@@ -170,18 +227,18 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                         elevation: 5,
                                         child: const Padding(
-                                          padding: EdgeInsets.all(
-                                              8.0), // Padding pour l'espace intérieur
+                                          padding: EdgeInsets.all(8.0),
+                                          // Padding pour l'espace intérieur
                                           child: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ajuster la hauteur selon le contenu
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Ajuster la hauteur selon le contenu
                                             children: [
                                               Center(
                                                 child: Text(
                                                   'TDS (mg/l)',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        14, // Réduire la taille de la police
+                                                    fontSize: 14,
+                                                    // Réduire la taille de la police
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -192,16 +249,16 @@ class _AccueilState extends State<Accueil> {
                                               Text(
                                                 'Résultat : 766',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
                                                 'Référence : < 600',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -231,18 +288,18 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                         elevation: 5,
                                         child: const Padding(
-                                          padding: EdgeInsets.all(
-                                              8.0), // Padding pour l'espace intérieur
+                                          padding: EdgeInsets.all(8.0),
+                                          // Padding pour l'espace intérieur
                                           child: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ajuster la hauteur selon le contenu
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Ajuster la hauteur selon le contenu
                                             children: [
                                               Center(
                                                 child: Text(
                                                   'Température',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        14, // Réduire la taille de la police
+                                                    fontSize: 14,
+                                                    // Réduire la taille de la police
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -253,16 +310,16 @@ class _AccueilState extends State<Accueil> {
                                               Text(
                                                 'Résultat : 30',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
                                                 'Référence : < 25 - 35',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -296,18 +353,18 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                         elevation: 5,
                                         child: const Padding(
-                                          padding: EdgeInsets.all(
-                                              8.0), // Padding pour l'espace intérieur
+                                          padding: EdgeInsets.all(8.0),
+                                          // Padding pour l'espace intérieur
                                           child: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ajuster la hauteur selon le contenu
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Ajuster la hauteur selon le contenu
                                             children: [
                                               Center(
                                                 child: Text(
                                                   'Turbidité (NFH)',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        14, // Réduire la taille de la police
+                                                    fontSize: 14,
+                                                    // Réduire la taille de la police
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -318,16 +375,16 @@ class _AccueilState extends State<Accueil> {
                                               Text(
                                                 'Résultat : 766',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
                                                 'Référence : < 5',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -357,18 +414,18 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                         elevation: 5,
                                         child: const Padding(
-                                          padding: EdgeInsets.all(
-                                              8.0), // Padding pour l'espace intérieur
+                                          padding: EdgeInsets.all(8.0),
+                                          // Padding pour l'espace intérieur
                                           child: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ajuster la hauteur selon le contenu
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Ajuster la hauteur selon le contenu
                                             children: [
                                               Center(
                                                 child: Text(
                                                   'PH',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        14, // Réduire la taille de la police
+                                                    fontSize: 14,
+                                                    // Réduire la taille de la police
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -379,16 +436,16 @@ class _AccueilState extends State<Accueil> {
                                               Text(
                                                 'Résultat : 6,4',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
                                                 'Référence : < 6 - 9',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -422,18 +479,18 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                         elevation: 5,
                                         child: const Padding(
-                                          padding: EdgeInsets.all(
-                                              8.0), // Padding pour l'espace intérieur
+                                          padding: EdgeInsets.all(8.0),
+                                          // Padding pour l'espace intérieur
                                           child: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ajuster la hauteur selon le contenu
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Ajuster la hauteur selon le contenu
                                             children: [
                                               Center(
                                                 child: Text(
                                                   'Conductivité (µS/cm)',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        14, // Réduire la taille de la police
+                                                    fontSize: 14,
+                                                    // Réduire la taille de la police
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -444,16 +501,16 @@ class _AccueilState extends State<Accueil> {
                                               Text(
                                                 'Résultat : 400',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
                                                 'Référence : < 600',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
@@ -483,18 +540,18 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                         elevation: 5,
                                         child: const Padding(
-                                          padding: EdgeInsets.all(
-                                              8.0), // Padding pour l'espace intérieur
+                                          padding: EdgeInsets.all(8.0),
+                                          // Padding pour l'espace intérieur
                                           child: Column(
-                                            mainAxisSize: MainAxisSize
-                                                .min, // Ajuster la hauteur selon le contenu
+                                            mainAxisSize: MainAxisSize.min,
+                                            // Ajuster la hauteur selon le contenu
                                             children: [
                                               Center(
                                                 child: Text(
                                                   'Oxygene dissous(O2mg/l)',
                                                   style: TextStyle(
-                                                    fontSize:
-                                                        14, // Réduire la taille de la police
+                                                    fontSize: 14,
+                                                    // Réduire la taille de la police
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -505,16 +562,16 @@ class _AccueilState extends State<Accueil> {
                                               Text(
                                                 'Résultat : 4,2',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),
                                               Text(
                                                 'Référence : < 6,5',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      12, // Réduire la taille de la police
+                                                  fontSize: 12,
+                                                  // Réduire la taille de la police
                                                   color: Colors.black,
                                                 ),
                                               ),

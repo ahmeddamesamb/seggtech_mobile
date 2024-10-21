@@ -9,6 +9,7 @@ class User {
   String? email;
   String? telephone;
   String? photoUrl;
+  String? photo;
   String? password;
   bool? isActive;
 
@@ -18,6 +19,7 @@ class User {
     this.email,
     this.telephone,
     this.photoUrl,
+    this.photo,
     this.password,
     this.isActive,
   });

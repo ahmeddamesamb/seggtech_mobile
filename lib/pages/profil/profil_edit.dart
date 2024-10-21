@@ -31,14 +31,14 @@ class _ProfilEditState extends State<ProfilEdit> {
             child: Container(
               width: double.infinity,
               height: 720.0, // Hauteur de la partie blanche
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),
                 ), // Coins arrondis en haut
               ),
-              child: Column(
+              child: const Column(
                 children: [
                   // Ajoute ici le contenu de ta partie blanche
                 ],
